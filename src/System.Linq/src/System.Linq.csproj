@@ -78,9 +78,7 @@
     <Compile Include="System\Linq\Where.cs" />
     <Compile Include="System\Linq\Zip.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Reference Include="System.Collections" />
     <Reference Include="System.Diagnostics.Debug" />
@@ -88,6 +86,19 @@
     <Reference Include="System.Resources.ResourceManager" />
     <Reference Include="System.Runtime" />
     <Reference Include="System.Runtime.Extensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="System\Linq\ChainLinq\Chain.cs" />
+    <Compile Include="System\Linq\ChainLinq\Consumables\Consumable.cs" />
+    <Compile Include="System\Linq\ChainLinq\Consumables\Enumerable.cs" />
+    <Compile Include="System\Linq\ChainLinq\Consume\Enumerable.cs" />
+    <Compile Include="System\Linq\ChainLinq\Enumerators\Consumer.cs" />
+    <Compile Include="System\Linq\ChainLinq\Enumerators\Enumerable.cs" />
+    <Compile Include="System\Linq\ChainLinq\GetEnumerator\Enumerable.cs" />
+    <Compile Include="System\Linq\ChainLinq\Links\Compose.cs" />
+    <Compile Include="System\Linq\ChainLinq\Links\Identity.cs" />
+    <Compile Include="System\Linq\ChainLinq\Links\Select.cs" />
+    <Compile Include="System\Linq\ChainLinq\Utils.cs" />
   </ItemGroup>
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), dir.targets))\dir.targets" />
 </Project>

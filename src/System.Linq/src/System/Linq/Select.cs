@@ -23,36 +23,38 @@ namespace System.Linq
                 throw Error.ArgumentNull(nameof(selector));
             }
 
-            if (source is Iterator<TSource> iterator)
-            {
-                return iterator.Select(selector);
-            }
+            return ChainLinq.Utils.PushTransform(source, new ChainLinq.Links.SelectLink<TSource, TResult>(selector));
 
-            if (source is IList<TSource> ilist)
-            {
-                if (source is TSource[] array)
-                {
-                    return array.Length == 0 ?
-                        EmptyPartition<TResult>.Instance :
-                        new SelectArrayIterator<TSource, TResult>(array, selector);
-                }
+            //if (source is Iterator<TSource> iterator)
+            //{
+            //    return iterator.Select(selector);
+            //}
 
-                if (source is List<TSource> list)
-                {
-                    return new SelectListIterator<TSource, TResult>(list, selector);
-                }
+            //if (source is IList<TSource> ilist)
+            //{
+            //    if (source is TSource[] array)
+            //    {
+            //        return array.Length == 0 ?
+            //            EmptyPartition<TResult>.Instance :
+            //            new SelectArrayIterator<TSource, TResult>(array, selector);
+            //    }
 
-                return new SelectIListIterator<TSource, TResult>(ilist, selector);
-            }
+            //    if (source is List<TSource> list)
+            //    {
+            //        return new SelectListIterator<TSource, TResult>(list, selector);
+            //    }
 
-            if (source is IPartition<TSource> partition)
-            {
-                return partition is EmptyPartition<TSource>
-                    ? EmptyPartition<TResult>.Instance
-                    : new SelectIPartitionIterator<TSource, TResult>(partition, selector);
-            }
+            //    return new SelectIListIterator<TSource, TResult>(ilist, selector);
+            //}
 
-            return new SelectEnumerableIterator<TSource, TResult>(source, selector);
+            //if (source is IPartition<TSource> partition)
+            //{
+            //    return partition is EmptyPartition<TSource>
+            //        ? EmptyPartition<TResult>.Instance
+            //        : new SelectIPartitionIterator<TSource, TResult>(partition, selector);
+            //}
+
+            //return new SelectEnumerableIterator<TSource, TResult>(source, selector);
         }
 
         public static IEnumerable<TResult> Select<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, int, TResult> selector)
