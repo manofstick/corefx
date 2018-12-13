@@ -723,7 +723,7 @@ namespace System.Linq.Tests
             var enumerator1 = query.GetEnumerator();
             var enumerator2 = query.GetEnumerator();
 
-            Assert.Same(query, enumerator1);
+            // Assert.Same(query, enumerator1);          // NB: In ChainLinq this is no longer true
             Assert.NotSame(enumerator1, enumerator2);
 
             enumerator1.Dispose();

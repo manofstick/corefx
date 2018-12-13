@@ -18,7 +18,6 @@ namespace System.Linq.ChainLinq.Enumerators
         {
             this.enumerable = enumerable;
             activity = factory.Compose(this);
-            ;
         }
 
         public override void ChainDispose()
@@ -43,6 +42,7 @@ namespace System.Linq.ChainLinq.Enumerators
         tryAgain:
             if (!enumerator.MoveNext() || state.IsStopped())
             {
+                Result = default(TResult);
                 activity.ChainComplete();
                 return false;
             }
